@@ -8,38 +8,22 @@
 #include <vehicle_interface/dbw_state_machine.hpp>
 #include <vehicle_interface/platform_interface.hpp>
 
-#include <dbw_ford_msgs/msg/brake_cmd.hpp>
-#include <dbw_ford_msgs/msg/gear_cmd.hpp>
-#include <dbw_ford_msgs/msg/misc_cmd.hpp>
-#include <dbw_ford_msgs/msg/steering_cmd.hpp>
-#include <dbw_ford_msgs/msg/throttle_cmd.hpp>
-#include <dbw_ford_msgs/msg/twist_cmd.hpp>
+#include <dataspeed_dbw_msgs/msg/brake_cmd.hpp>
+#include <dataspeed_dbw_msgs/msg/gear_cmd.hpp>
+#include <dataspeed_dbw_msgs/msg/misc_cmd.hpp>
+#include <dataspeed_dbw_msgs/msg/steering_cmd.hpp>
+#include <dataspeed_dbw_msgs/msg/throttle_cmd.hpp>
 
-#include <dbw_ford_msgs/msg/brake_info_report.hpp>
-#include <dbw_ford_msgs/msg/brake_report.hpp>
-#include <dbw_ford_msgs/msg/driver_assist_report.hpp>
-#include <dbw_ford_msgs/msg/fuel_level_report.hpp>
-#include <dbw_ford_msgs/msg/gear_report.hpp>
-#include <dbw_ford_msgs/msg/misc1_report.hpp>
-#include <dbw_ford_msgs/msg/steering_report.hpp>
-#include <dbw_ford_msgs/msg/surround_report.hpp>
-#include <dbw_ford_msgs/msg/throttle_info_report.hpp>
-#include <dbw_ford_msgs/msg/throttle_report.hpp>
-#include <dbw_ford_msgs/msg/tire_pressure_report.hpp>
-#include <dbw_ford_msgs/msg/wheel_position_report.hpp>
-#include <dbw_ford_msgs/msg/wheel_speed_report.hpp>
+#include <dataspeed_dbw_msgs/msg/brake_report.hpp>
+#include <dataspeed_dbw_msgs/msg/gear_report.hpp>
+#include <dataspeed_dbw_msgs/msg/misc_report.hpp>
+#include <dataspeed_dbw_msgs/msg/steering_report.hpp>
+#include <dataspeed_dbw_msgs/msg/throttle_report.hpp>
 
-#include <dbw_ford_msgs/msg/ambient_light.hpp>
-#include <dbw_ford_msgs/msg/gear.hpp>
-#include <dbw_ford_msgs/msg/gear_num.hpp>
-#include <dbw_ford_msgs/msg/gear_reject.hpp>
-#include <dbw_ford_msgs/msg/hill_start_assist.hpp>
-#include <dbw_ford_msgs/msg/ignition.hpp>
-#include <dbw_ford_msgs/msg/parking_brake.hpp>
-#include <dbw_ford_msgs/msg/quality_factor.hpp>
-#include <dbw_ford_msgs/msg/turn_signal.hpp>
-#include <dbw_ford_msgs/msg/watchdog_counter.hpp>
-#include <dbw_ford_msgs/msg/wiper.hpp>
+#include <dataspeed_dbw_msgs/msg/gear.hpp>
+#include <dataspeed_dbw_msgs/msg/gear_reject.hpp>
+#include <dataspeed_dbw_msgs/msg/turn_signal.hpp>
+#include <dataspeed_dbw_msgs/msg/watchdog_counter.hpp>
 
 #include <autoware_auto_control_msgs/msg/ackermann_control_command.hpp>
 #include <autoware_auto_control_msgs/msg/high_level_control_command.hpp>
@@ -66,43 +50,29 @@ using autoware::common::types::float64_t;
 using autoware::common::types::PI;
 using autoware::common::types::TAU;
 
-using dbw_ford_msgs::msg::BrakeCmd;
-using dbw_ford_msgs::msg::GearCmd;
-using dbw_ford_msgs::msg::MiscCmd;
-using dbw_ford_msgs::msg::SteeringCmd;
-using dbw_ford_msgs::msg::ThrottleCmd;
-using dbw_ford_msgs::msg::TwistCmd;
+using dataspeed_dbw_msgs::msg::BrakeCmd;
+using dataspeed_dbw_msgs::msg::GearCmd;
+using dataspeed_dbw_msgs::msg::MiscCmd;
+using dataspeed_dbw_msgs::msg::SteeringCmd;
+using dataspeed_dbw_msgs::msg::ThrottleCmd;
 
-using dbw_ford_msgs::msg::BrakeInfoReport;
-using dbw_ford_msgs::msg::BrakeReport;
-using dbw_ford_msgs::msg::DriverAssistReport;
-using dbw_ford_msgs::msg::FuelLevelReport;
-// Need to distinguish between dbw_ford_msgs::msg::GearReport and
+using dataspeed_dbw_msgs::msg::BrakeReport;
+
+// Need to distinguish between dataspeed_dbw_msgs::msg::GearReport and
 // autoware_auto_vehicle_msg::msg::GearReport
 namespace dbw_ford
 {
-using dbw_ford_msgs::msg::GearReport;
+using dataspeed_dbw_msgs::msg::GearReport;
 }  // namespace dbw_ford
-using dbw_ford_msgs::msg::Misc1Report;
-using dbw_ford_msgs::msg::SteeringReport;
-using dbw_ford_msgs::msg::SurroundReport;
-using dbw_ford_msgs::msg::ThrottleInfoReport;
-using dbw_ford_msgs::msg::ThrottleReport;
-using dbw_ford_msgs::msg::TirePressureReport;
-using dbw_ford_msgs::msg::WheelPositionReport;
-using dbw_ford_msgs::msg::WheelSpeedReport;
 
-using dbw_ford_msgs::msg::AmbientLight;
-using dbw_ford_msgs::msg::Gear;
-using dbw_ford_msgs::msg::GearNum;
-using dbw_ford_msgs::msg::GearReject;
-using dbw_ford_msgs::msg::HillStartAssist;
-using dbw_ford_msgs::msg::Ignition;
-using dbw_ford_msgs::msg::ParkingBrake;
-using dbw_ford_msgs::msg::QualityFactor;
-using dbw_ford_msgs::msg::TurnSignal;
-using dbw_ford_msgs::msg::WatchdogCounter;
-using dbw_ford_msgs::msg::Wiper;
+using dataspeed_dbw_msgs::msg::MiscReport;
+using dataspeed_dbw_msgs::msg::SteeringReport;
+using dataspeed_dbw_msgs::msg::ThrottleReport;
+
+using dataspeed_dbw_msgs::msg::Gear;
+using dataspeed_dbw_msgs::msg::GearReject;
+using dataspeed_dbw_msgs::msg::TurnSignal;
+using dataspeed_dbw_msgs::msg::WatchdogCounter;
 
 using autoware_auto_control_msgs::msg::AckermannControlCommand;
 using autoware_auto_control_msgs::msg::HighLevelControlCommand;
